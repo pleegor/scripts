@@ -3,7 +3,9 @@ import datetime
 import shutil
 import os
 
-# Creates archive of jenkins home and pushes archive into s3
+# Creates archive of jenkins home into .tar, pushes archive into s3,
+# and deletes all archived files locally besides the latest one. You
+# need to have awscli and boto3 installed and pre-configured
 
 today = datetime.date.today()
 
@@ -35,7 +37,7 @@ def push_to_s3(archive, bucket_name):
 
     """
     :param bucket_name: Name of the bucket where archive is uploaded
-    :return:
+    :return: uploaded
     """
     print('Starting upload to S3')
     s3 = boto3.resource('s3')
@@ -52,9 +54,9 @@ def remove_old_archive(file_name):
     '''
     This function enforces only one archive to be stored in /tmp
     :param file_name:
-    :return:
+    :return: file
     '''
-    #provide path where archoves are locally stored
+    #provide path where archives are locally stored
     path = <path>
     item_list = os.listdir(path)
     for file in item_list:
