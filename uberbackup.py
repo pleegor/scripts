@@ -66,14 +66,14 @@ def remove_old_archive(file_name, path):
     :return:
     '''
     item_list = os.listdir(path)
-    for file in item_list:
-        if file != file_name + str(today) + '.tar':
+    for item in item_list:
+        if item != file_name + str(today) + '.tar':
             os.chdir(path)
-            os.remove(file)
-            print(file + " " + 'has been deleted')
+            os.remove(item)
+            print(item + " " + 'has been deleted')
         else:
-            print('latest present backup is' + " "  + file)
-    return file
+            print('latest present backup is' + " "  + item)
+    return item
 
 
 archive = build_archive('uberjenkins', args.destination, args.target)
