@@ -22,7 +22,7 @@ args = parser.parse_args()
 
 
 
-def build_archive(name):
+def build_archive(name, archived_location, archiving_dir):
 
     """
      This function will create an archive of Jenkins's home directory
@@ -33,9 +33,7 @@ def build_archive(name):
     """
 
     archive_name = name + str(today)
-    archived_location = args.destination
     #print(archive_name)
-    archiving_dir = args.target
     print('Starting archiving Jenkins home located at:'  + " " +
        archiving_dir)
     archived = shutil.make_archive(archived_location + archive_name,
@@ -61,13 +59,12 @@ def push_to_s3(archive, bucket_name):
     return uploaded
 
 
-def remove_old_archive(file_name):
+def remove_old_archive(file_name, path):
     '''
     This function enforces only one archive to be stored in /tmp
     :param file_name:
     :return:
     '''
-    path = args.destination
     item_list = os.listdir(path)
     for file in item_list:
         if file != file_name + str(today) + '.tar':
@@ -79,6 +76,6 @@ def remove_old_archive(file_name):
     return file
 
 
-archive = build_archive('uberjenkins')
+archive = build_archive('uberjenkins', args.destination, args.target)
 upload = push_to_s3(archive, 'cbit-logging')
-delete = remove_old_archive('uberjenkins')
+delete = remove_old_archive('uberjenkins', args.destination)
