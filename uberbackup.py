@@ -8,16 +8,20 @@ import argparse
 
 today = datetime.date.today()
 parser = argparse.ArgumentParser(description='This script will create '
-                                             'an archive and will push '
-                                             'it into S3 bucket')
+                                             'an archive that will be '
+                                             'pushed into S3 bucket. '
+                                             'In order to make '
+                                             'everything work, you will '
+                                             'need to have '
+                                             'awscli and boto3 libraries'
+                                             ' installed and configured.'
+                                             ' ')
 parser.add_argument('-destination', type=str,
                     help='enter path where new archive will be stored')
 parser.add_argument('-target', type=str,
                     help='enter location of the directory '
                          'that will be archived')
-# parser.add_argument('-bucket-name', type=str,
-#                     help='enter S3 bucket name where archive will '
-#                          'be pushed to')
+parser.add_argument('-bucket', type=str, help='Provide S3 bucket name')
 args = parser.parse_args()
 
 
@@ -77,5 +81,5 @@ def remove_old_archive(file_name, path):
 
 
 archive = build_archive('uberjenkins', args.destination, args.target)
-upload = push_to_s3(archive, 'cbit-logging')
+upload = push_to_s3(archive, args.bucket)
 delete = remove_old_archive('uberjenkins', args.destination)
