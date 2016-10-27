@@ -17,11 +17,11 @@ parser = argparse.ArgumentParser(description='This script will create '
                                              ' installed and configured.'
                                              ' ')
 parser.add_argument('-destination', type=str,
-                    help='enter path where new archive will be stored')
+                    help='provide path where new archive will be stored')
 parser.add_argument('-target', type=str,
-                    help='enter location of the directory '
+                    help='provide location of the directory '
                          'that will be archived')
-parser.add_argument('-bucket', type=str, help='Provide S3 bucket name')
+parser.add_argument('-bucket', type=str, help='provide S3 bucket name')
 args = parser.parse_args()
 
 
