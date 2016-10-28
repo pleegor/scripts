@@ -41,7 +41,7 @@ def build_archive(name, archived_location, archiving_dir):
     print('Starting archiving Jenkins home located at:'  + " " +
        archiving_dir)
     archived = shutil.make_archive(archived_location + archive_name,
-                            'tar', archiving_dir)
+                            'gztar', archiving_dir)
     print("Archive has been built in:" + " " + archive_name)
     return archived
 
