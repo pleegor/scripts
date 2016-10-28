@@ -54,7 +54,7 @@ def push_to_s3(archive, bucket_name):
     """
     print('Starting upload to S3')
     s3 = boto3.resource('s3')
-    file_name = 'uberjenkins' + str(today) + '.tar'
+    file_name = 'uberjenkins' + str(today) + '.tar.gz'
     uploaded = s3.Bucket(bucket_name).upload_file(
         archive,
         file_name
@@ -71,7 +71,7 @@ def remove_old_archive(file_name, path):
     '''
     item_list = os.listdir(path)
     for item in item_list:
-        if item != file_name + str(today) + '.tar':
+        if item != file_name + str(today) + '.tar.gz':
             os.chdir(path)
             os.remove(item)
             print(item + " " + 'has been deleted')
