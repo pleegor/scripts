@@ -1,6 +1,5 @@
 #!/bin/bash
 
-#  Migrate to local account local_migrator.sh
 #
 #  This script is designed to ubind machine using adleave utility, uninstall Centrify, remove a mobile user account and re-create
 #  a local account with the same username and the password from user-input.
